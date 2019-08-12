@@ -12,12 +12,17 @@ public class UiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-            .authorizeRequests()
-            .antMatchers("/", "/login**")
-            .permitAll()
-            .anyRequest()
-            .authenticated();
+    	
+        http.antMatcher("/**").authorizeRequests()
+            .antMatchers("/", "/login**").permitAll()
+            .anyRequest().authenticated()
+			.and()
+				.logout()
+				.logoutSuccessUrl("/").permitAll()
+				.logoutSuccessUrl("http://localhost:8081/auth/exit")
+			.and()
+				.csrf().disable()
+			;
     }
 
 }
