@@ -5,16 +5,39 @@
 <title>Spring Security SSO Client 2</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="container">
+
 	<div class="col-sm-12">
 		<h1>Secured Page</h1>
 		Welcome, <span th:text="${#authentication.name}">Name</span>
 		<br/>
         Your authorities are <span th:text="${#authentication.authorities}">authorities</span>        
 	</div>
+	
+	<div class="col-sm-12">
+	
+		<button type="button" class="btn btn-primary" id="logoutBtn">Logout</button>		
+        
+    </div>   
+    	
 </div>
+
+
+
+<script>
+	$('#logoutBtn').on('click', function(event) {
+    	event.preventDefault(); 
+    	//var url = $(this).data('target');
+    	var url = "logout"
+    	location.replace(url);
+	});
+</script>
+
+
 </body>
 </html>

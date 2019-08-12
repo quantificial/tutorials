@@ -18,6 +18,15 @@ public class UiSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll()
             .anyRequest()
             .authenticated();
+        
+        
+        http
+			.logout()
+			.logoutSuccessUrl("/").permitAll()
+			.logoutSuccessUrl("http://localhost:8081/auth/exit")
+		;
+        
+        http.csrf().disable();
     }
 
 }
