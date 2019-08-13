@@ -13,4 +13,9 @@ public class UserController {
         System.out.println(principal);
         return principal;
     }
+    
+    @RequestMapping("/test")
+    public String test() {
+    	return "test";
+    }
 }
