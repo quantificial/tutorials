@@ -14,6 +14,7 @@ security:
       clientSecret: secret
       accessTokenUri: http://localhost:8081/auth/oauth/token
       userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
+      #registered-redirect-uri:      #- http://localhost:8082/ui/
     resource:
       userInfoUri: http://localhost:8081/auth/user/me
 spring:
