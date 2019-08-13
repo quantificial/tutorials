@@ -60,7 +60,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     // create JDBC client detail service
     @Bean(name="jdbcClientDetailsService")
     public JdbcClientDetailsService clientDetailsService() {
-        return new JdbcClientDetailsService(oauthDataSource());
+    	JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(oauthDataSource());
+    	jdbcClientDetailsService.setPasswordEncoder(passwordEncoder);
+        return jdbcClientDetailsService;
     }    
         
     // token store in JDBC format
@@ -102,6 +104,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     	// use jdbc instead of in memory
     	
     	 clients.withClientDetails(clientDetailsService());
+    	 
+    	 
 
     	
     	/** data example

@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .password(passwordEncoder().encode("abcd1234"))
             .roles("USER");
         
+        
     } // @formatter:on
 
     @Bean

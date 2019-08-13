@@ -4,10 +4,10 @@ INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_gr
   VALUES ('clientId', '{bcrypt}$2a$10$vCXMWCn7fDZWOcLnIEhmK.74dvK1Eh8ae2WrWlhr2ETPLoxQctN4.', 'read,write', 'password,refresh_token,client_credentials', 'ROLE_CLIENT', 300);
  
 INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, web_server_redirect_uri, autoapprove)
-  VALUES ('app1', 'secret', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8082/ui/login', 'true');
+  VALUES ('app1', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8082/ui/login', 'true');
 
 INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, web_server_redirect_uri, autoapprove)
-  VALUES ('app2', '{bcrypt}$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8083/ui2/login', 'true'); 
+  VALUES ('app2', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8083/ui2/login', 'true'); 
   
 
 -- user role
