@@ -12,17 +12,34 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
 @Order(1)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 //	    web.ignoring()
 //	            .antMatchers("/test");
 	}
+	
+	private PasswordEncoder passwordEncoder;
+	
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        if (passwordEncoder == null) {
+            passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        }
+        return passwordEncoder;
+    }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception { // @formatter:off
@@ -71,10 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
     } // @formatter:on
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
     
     @Bean
     @Override

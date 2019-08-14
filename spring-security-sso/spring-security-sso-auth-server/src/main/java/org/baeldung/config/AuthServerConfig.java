@@ -8,8 +8,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -23,6 +26,9 @@ import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeSe
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 
 @Configuration
@@ -62,10 +68,44 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 //	λ curl -s -u appalone:secret -X POST localhost:8081/auth/oauth/token?grant_type=client_credentials
 //	{"access_token":"c70d254e-52e7-42c8-8856-1a29c905f640","token_type":"bearer","expires_in":3562,"scope":"read write"}
 	
+	
+	
+	/*
+	 * JWT Coding - [
+	 */
+    @Autowired
+    private Environment environment;	
+	
+    @Bean
+    protected JwtAccessTokenConverter jwtTokenEnhancer() {
+        String pwd = environment.getProperty("keystore.password");
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                new ClassPathResource("/keystore/jwt.jks"),
+                pwd.toCharArray());
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
+        return converter;
+    }	
     
-    @Autowired    
-    private BCryptPasswordEncoder passwordEncoder;
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(jwtTokenEnhancer());
+    }    
+    
+	
+	
+	/*
+	 * JWT Coding - ]
+	 */
+	
+    
+//    @Autowired    
+//    private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired    
+    private PasswordEncoder passwordEncoder;
+
+    
     // h2 datasource
     //@Autowired
     //private DataSource dataSource;
@@ -100,10 +140,13 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     }    
         
     // token store in JDBC format
-    @Bean
-    public TokenStore tokenStore() {
-        return new JdbcTokenStore(oauthDataSource());
-    }
+//    @Bean
+//    public TokenStore tokenStore() {
+//        return new JdbcTokenStore(oauthDataSource());
+//    }
+    
+    
+    
     
     @Bean
     public ApprovalStore approvalStore() {
@@ -127,6 +170,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
          		.tokenStore(tokenStore())
+         		.tokenEnhancer(jwtTokenEnhancer()) // JWT
          		.approvalStore(approvalStore())
                 .authenticationManager(authenticationManager);
                 
