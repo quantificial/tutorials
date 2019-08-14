@@ -105,7 +105,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     	
     	 clients.withClientDetails(clientDetailsService());
     	 
-    	 
+    	 System.out.println(oauthDataSource().toString());
 
     	
     	/** data example

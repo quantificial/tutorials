@@ -8,6 +8,9 @@ INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_gr
 
 INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, web_server_redirect_uri, autoapprove)
   VALUES ('app2', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8083/ui2/login', 'true'); 
+
+INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, web_server_redirect_uri, autoapprove)
+  VALUES ('app3', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8084/login/sso', 'true'); 
   
 
 -- user role
@@ -18,7 +21,7 @@ INSERT INTO authority VALUES(4,'ROLE_SSS_USER');
 
 -- users credentials
 
-INSERT INTO credentials VALUES (1, true,'johnson','{bcrypt}$2y$12$iqgG/YvaANHWEadKgPAYCe/KlvrEuNUNBCXWjMGlZBeWcoNrpzJ0G','0');
+INSERT INTO credentials VALUES (1, true,'johnson','$2a$10$s.Fr/DyaoiMcRmCD4zicRuMXm6EUhvijVQtNOzKKI2YS7SMIWql9K','0');
 --INSERT INTO credentials VALUES(2,b'1','resource_admin','$2a$10$BurTWIy5NTF9GJJH4magz.9Bd4bBurWYG8tmXxeQh1vs7r/wnCFG2','0');
 --INSERT INTO credentials  VALUES(3,b'1','product_admin','$2a$10$BurTWIy5NTF9GJJH4magz.9Bd4bBurWYG8tmXxeQh1vs7r/wnCFG2','0');
 
