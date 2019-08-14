@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	// http.requestMatchers define which requests will be intercepted
         http
         	.requestMatchers()        	        	
-            	.antMatchers("/login", "/oauth/authorize","/exit","/h2","/h2/**"); 
+            	.antMatchers("/login", "/oauth/authorize","/oauth/check_token","/exit","/h2","/h2/**"); 
 
         // example
         // define /test end point will be intercepted

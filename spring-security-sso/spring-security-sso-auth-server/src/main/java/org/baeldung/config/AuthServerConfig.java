@@ -28,6 +28,40 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
+
+// example of using sql to init the database	
+//	@Value("classpath:schema.sql")
+//	private Resource schemaScript;
+	
+//	@Bean
+//	public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+//	    DataSourceInitializer initializer = new DataSourceInitializer();
+//	    initializer.setDataSource(dataSource);
+//	    initializer.setDatabasePopulator(databasePopulator());
+//	    return initializer;
+//	}
+//	
+
+//	private DatabasePopulator databasePopulator() {
+//	    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+//	    populator.addScript(schemaScript);
+//	    return populator;
+//	}
+	
+//	@Bean
+//	public DataSource dataSource() {
+//	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//	    dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+//	    dataSource.setUrl(env.getProperty("jdbc.url"));
+//	    dataSource.setUsername(env.getProperty("jdbc.user"));
+//	    dataSource.setPassword(env.getProperty("jdbc.pass"));
+//	    return dataSource;
+//	}
+
+//  server credentials only
+//	λ curl -s -u appalone:secret -X POST localhost:8081/auth/oauth/token?grant_type=client_credentials
+//	{"access_token":"c70d254e-52e7-42c8-8856-1a29c905f640","token_type":"bearer","expires_in":3562,"scope":"read write"}
+	
     
     @Autowired    
     private BCryptPasswordEncoder passwordEncoder;
@@ -47,8 +81,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        //oauthServer.tokenKeyAccess("permitAll()")
-        //    .checkTokenAccess("isAuthenticated()");
+        oauthServer.tokenKeyAccess("permitAll()")
+            .checkTokenAccess("isAuthenticated()");
     }
 
     // create the in memory token store

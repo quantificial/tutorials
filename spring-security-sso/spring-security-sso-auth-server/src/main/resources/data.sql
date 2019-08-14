@@ -11,6 +11,9 @@ INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_gr
 
 INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_grant_types, authorities, access_token_validity, web_server_redirect_uri, autoapprove)
   VALUES ('app3', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'user_info', 'authorization_code', 'ROLE_CLIENT', 3600, 'http://localhost:8084/login/sso', 'true'); 
+
+INSERT INTO oauth_client_details (client_id,resource_ids, client_secret, scope, authorized_grant_types, authorities, access_token_validity,refresh_token_validity, web_server_redirect_uri, autoapprove)
+  VALUES ('appalone', 'api', '$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'read,write', 'client_credentials, refresh_token', 'ROLE_CLIENT', 3600, 3600, 'http://localhost:8084/login/sso', 'true'); 
   
 
 -- user role
