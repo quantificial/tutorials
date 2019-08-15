@@ -14,6 +14,8 @@ public class Employee {
     private String firstName;
 
     private String lastName;
+    
+    private String remark;
 
     protected Employee() {
     }
@@ -43,7 +45,15 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    @Override
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@Override
     public String toString() {
         return String.format("Employee[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
     }
