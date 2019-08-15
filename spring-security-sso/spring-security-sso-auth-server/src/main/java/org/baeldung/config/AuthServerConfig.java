@@ -1,5 +1,6 @@
 package org.baeldung.config;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 @Configuration
@@ -97,6 +100,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	/*
 	 * JWT Coding - ]
 	 */
+    
+
 	
     
 //    @Autowired    
@@ -126,10 +131,10 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     // create the in memory token store
-    @Bean
-    public TokenStore inMemoryTokenStore() {
-        return new InMemoryTokenStore();
-    }
+//    @Bean
+//    public TokenStore inMemoryTokenStore() {
+//        return new InMemoryTokenStore();
+//    }
     
     // create JDBC client detail service
     @Bean(name="jdbcClientDetailsService")
@@ -164,7 +169,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         
     
     /**
-     * config to use in memory token store
+     * configure token store
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
@@ -173,7 +178,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
          		.tokenEnhancer(jwtTokenEnhancer()) // JWT
          		.approvalStore(approvalStore())
                 .authenticationManager(authenticationManager);
-                
     }    
 
     @Override

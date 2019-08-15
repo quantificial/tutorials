@@ -65,6 +65,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         
         // enable default form login
         http.formLogin().permitAll();
+        
+        
+        // create custom login form 
 
         // disable csrf, such that get could be used for /logout
         http.csrf().disable();
