@@ -5,7 +5,7 @@
 </head>
 <body>
 <div>
-    <form name="f" th:action="${springMacroRequestContext.getContextPath()}/ologin" method="post">
+    <form name="f" action="${springMacroRequestContext.getContextPath()}/ologin/process" method="post">
         <fieldset>
             <legend>Please Login</legend>
             

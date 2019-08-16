@@ -65,6 +65,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // other endpoints
     	http.requestMatchers().antMatchers("/ologin");
+    	http.requestMatchers().antMatchers("/ologin/process");
         http.requestMatchers().antMatchers("/exit");
         http.requestMatchers().antMatchers("/h2","/h2/**");
         http.requestMatchers().antMatchers("/test");
@@ -75,6 +76,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         // such that we could assign the permission
         http.authorizeRequests().antMatchers("/ologin").permitAll();
+        http.authorizeRequests().antMatchers("/ologin/process").permitAll();
         http.authorizeRequests().antMatchers("/test").permitAll();
         http.authorizeRequests().antMatchers("/moon").permitAll();
         http.authorizeRequests().antMatchers("/sun").permitAll();
@@ -90,7 +92,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         
         // form based authentication is supported
         //http.formLogin().permitAll();
-        http.formLogin().loginPage("/ologin").permitAll();
+        http.formLogin().loginPage("/ologin").loginProcessingUrl("/ologin/process").permitAll();
         //http.formLogin().loginProcessingUrl("/perform_login");
         
         
