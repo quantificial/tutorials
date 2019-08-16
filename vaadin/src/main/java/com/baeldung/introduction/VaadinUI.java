@@ -15,6 +15,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.Binder;
 import com.vaadin.data.validator.StringLengthValidator;
+import com.vaadin.flow.router.Route;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.VaadinRequest;
@@ -45,6 +46,7 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 @Push
 @Theme("mytheme")
+@Route("/ui")
 public class VaadinUI extends UI {
 
     private Label currentTime;
