@@ -14,13 +14,15 @@ INSERT INTO oauth_client_details (client_id, client_secret, scope, authorized_gr
 
 INSERT INTO oauth_client_details (client_id,resource_ids, client_secret, scope, authorized_grant_types, authorities, access_token_validity,refresh_token_validity, web_server_redirect_uri, autoapprove)
   VALUES ('appalone', 'api', '{bcrypt}$2a$10$w6U0a421YvG8GuVXeVcyk..7Kba/esmX0jNwV2jYYwedKC2CIT7Qy', 'read,write', 'client_credentials,refresh_token', 'ROLE_CLIENT', 3600, 3600, 'http://localhost:8084/login/sso', 'true'); 
-  
+
 
 -- user role
 INSERT INTO authority  VALUES(1,'ROLE_OAUTH_ADMIN');
 INSERT INTO authority VALUES(2,'ROLE_RESOURCE_ADMIN');
 INSERT INTO authority VALUES(3,'ROLE_PRODUCT_ADMIN');
 INSERT INTO authority VALUES(4,'ROLE_SSS_USER');
+INSERT INTO authority VALUES(5,'ROLE_SSS_ADMIN');
+INSERT INTO authority VALUES(6,'ROLE_SSO_ADMIN');
 
 -- users credentials
 
@@ -31,6 +33,8 @@ INSERT INTO credentials VALUES (1, true,'johnson','{bcrypt}$2a$10$s.Fr/DyaoiMcRm
 -- users role
 
 INSERT INTO credentials_authorities VALUES (1,4);
+INSERT INTO credentials_authorities VALUES (1,5);
+INSERT INTO credentials_authorities VALUES (1,6);
 --INSERT INTO credentials_authorities VALUE (2,2);
 --INSERT INTO credentials_authorities VALUE (3,3);
   

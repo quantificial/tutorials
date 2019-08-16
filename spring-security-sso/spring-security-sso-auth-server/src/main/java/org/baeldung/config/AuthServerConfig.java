@@ -71,10 +71,11 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 //	λ curl -s -u appalone:secret -X POST localhost:8081/auth/oauth/token?grant_type=client_credentials
 //	{"access_token":"c70d254e-52e7-42c8-8856-1a29c905f640","token_type":"bearer","expires_in":3562,"scope":"read write"}
 	
-	
+// test password grant_type
+// curl -X POST --user clientId:secret http://localhost:8081/auth/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=johnson&password=abcd1234&scope=read"
 	
 	/*
-	 * JWT Coding - [
+	 * JWT Token Configuration - [
 	 */
     @Autowired
     private Environment environment;	
@@ -94,11 +95,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtTokenEnhancer());
     }    
-    
-	
-	
+    		
 	/*
-	 * JWT Coding - ]
+	 * JWT Token Configuration - ]
 	 */
     
 

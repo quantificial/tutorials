@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @EnableWebSecurity
 @Configuration
@@ -57,12 +56,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception { // @formatter:off
     	
     	// http.requestMatchers define which requests will be intercepted
-        http
+    	// The requestMatchers line specifies to which requests the security check applies. The authorizeRequests line does the actual security check
+        
+    	// for oauth2 endpoints
+    	http
         	.requestMatchers()        	        	
-            	.antMatchers("/login", "/oauth/authorize","/oauth/check_token","/exit","/h2","/h2/**"); 
+            	.antMatchers("/login", "/oauth/authorize","/oauth/check_token"); 
 
-        // example
-        // define /test end point will be intercepted
+        // other endpoints
+    	http.requestMatchers().antMatchers("/ologin");
+        http.requestMatchers().antMatchers("/exit");
+        http.requestMatchers().antMatchers("/h2","/h2/**");
         http.requestMatchers().antMatchers("/test");
         http.requestMatchers().antMatchers("/moon");
         http.requestMatchers().antMatchers("/sun");
@@ -70,6 +74,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.requestMatchers().antMatchers("/resources/**");
         
         // such that we could assign the permission
+        http.authorizeRequests().antMatchers("/ologin").permitAll();
         http.authorizeRequests().antMatchers("/test").permitAll();
         http.authorizeRequests().antMatchers("/moon").permitAll();
         http.authorizeRequests().antMatchers("/sun").permitAll();
@@ -84,8 +89,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             	.authenticated();
                         
         // form based authentication is supported
-        http.formLogin().permitAll();
-        //http.formLogin().loginPage("/login").permitAll();
+        //http.formLogin().permitAll();
+        http.formLogin().loginPage("/ologin").permitAll();
         //http.formLogin().loginProcessingUrl("/perform_login");
         
         
